@@ -1,0 +1,21 @@
+services:
+  packetscope:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      PACKETSCOPE_WORKDIR: /data/sessions
+      PACKETSCOPE_SESSION_TTL: "14400"
+      PACKETSCOPE_MAX_UPLOAD_MB: "100"
+    volumes:
+      - packetscope_sessions:/data/sessions
+    tmpfs:
+      - /tmp:size=256m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+
+volumes:
+  packetscope_sessions:

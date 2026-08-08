@@ -1,0 +1,15 @@
+{
+  "allowlisted_ips": ["10.0.0.10"],
+  "allowlisted_domains": ["monitoring.example.org"],
+  "suppressed_categories": [],
+  "suppressed_titles": [],
+  "detections": {
+    "beacon_min_observations": 5,
+    "beacon_max_jitter_cv": 0.2,
+    "dns_tunnel_min_queries": 10,
+    "vertical_scan_port_threshold": 15,
+    "horizontal_scan_host_threshold": 20,
+    "icmp_echo_threshold": 20,
+    "outbound_payload_threshold_bytes": 5242880
+  }
+}

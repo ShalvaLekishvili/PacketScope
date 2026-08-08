@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PacketScope — local-first PCAP/PCAPNG network forensics and investigation workbench." />
+  <title>PacketScope · Network Forensics Workbench</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div><strong>PacketScope</strong><small>NETWORK FORENSICS 2.0</small></div>
+      </div>
+      <nav id="nav">
+        <button class="nav-item active" data-view="overview"><span>01</span>Overview</button>
+        <button class="nav-item" data-view="findings"><span>02</span>Findings</button>
+        <button class="nav-item" data-view="hosts"><span>03</span>Hosts</button>
+        <button class="nav-item" data-view="graph"><span>04</span>Network Graph</button>
+        <button class="nav-item" data-view="flows"><span>05</span>Flows</button>
+        <button class="nav-item" data-view="protocols"><span>06</span>Protocol Intel</button>
+        <button class="nav-item" data-view="iocs"><span>07</span>IOC Inventory</button>
+        <button class="nav-item" data-view="timeline"><span>08</span>Timeline</button>
+      </nav>
+      <div class="side-foot">
+        <div class="status-dot"><i></i> Local evidence workspace</div>
+        <small id="sessionState">No active investigation</small>
+        <button class="text-button hidden" id="closeSessionBtn">Close investigation</button>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">DEFENSIVE NETWORK ANALYSIS</p>
+          <h1 id="pageTitle">Investigation overview</h1>
+        </div>
+        <div class="top-actions">
+          <button class="button ghost" id="jsonBtn" disabled>Export JSON</button>
+          <button class="button ghost" id="reportBtn" disabled>HTML report</button>
+          <label class="button primary" for="fileInput">Analyze capture</label>
+          <input id="fileInput" type="file" accept=".pcap,.pcapng,.cap" hidden />
+        </div>
+      </header>
+
+      <section class="notice" id="notice">
+        <div><strong>Local-first workflow.</strong> Capture bytes stay on this PacketScope instance. Analysis results contain bounded metadata and evidence packet references, not credential values.</div>
+        <button id="demoBtn">Load synthetic demo →</button>
+      </section>
+
+      <section class="loading hidden" id="loading">
+        <div class="spinner"></div>
+        <div><strong>Analyzing evidence</strong><small>Parsing protocols, reconstructing bounded streams, correlating transactions and evaluating detections…</small></div>
+      </section>
+
+      <div id="content">
+        <section class="empty-state">
+          <div class="scope-visual" aria-hidden="true">
+            <div class="scope-ring r1"></div><div class="scope-ring r2"></div><div class="scope-ring r3"></div>
+            <div class="scope-line l1"></div><div class="scope-line l2"></div><div class="scope-dot d1"></div><div class="scope-dot d2"></div>
+          </div>
+          <p class="eyebrow">READY FOR EVIDENCE</p>
+          <h2>Turn packet captures into an investigation surface.</h2>
+          <p>Profile hosts, correlate DNS/HTTP/TLS activity, identify network behavior, pivot through findings, annotate analyst verdicts and export the exact packets behind a lead.</p>
+          <div class="empty-actions"><label class="button primary" for="fileInput">Choose capture</label><button class="button ghost" id="demoBtn2">Open demo</button></div>
+          <div class="capabilities"><span>PCAP + PCAPNG</span><span>8 link-layer types</span><span>DNS / HTTP / TLS</span><span>ARP / DHCP / ICMP / NTP</span><span>JA3 + X.509</span><span>Evidence slicing</span></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="findingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-head"><div><p class="eyebrow">FINDING INVESTIGATION</p><h2 id="modalTitle">Finding</h2></div><button class="icon-button" id="modalClose" aria-label="Close">×</button></div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

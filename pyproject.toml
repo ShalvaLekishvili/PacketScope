@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "packetscope"
+version = "2.0.0"
+description = "Local-first defensive PCAP/PCAPNG network-forensics workbench with protocol intelligence, evidence-backed detections, host profiling, graph analysis, investigation workspaces, and PCAP slicing."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Shalva Lekishvili"}]
+keywords = ["pcap", "network-forensics", "soc", "dfir", "packet-analysis", "threat-hunting"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Information Technology",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security",
+]
+dependencies = [
+  "fastapi>=0.115,<1.0",
+  "uvicorn>=0.30,<1.0",
+  "cryptography>=43,<51",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "httpx>=0.27,<1.0", "ruff>=0.9,<1.0"]
+
+[project.scripts]
+packetscope = "packetscope.cli:main"
+
+[tool.setuptools]
+packages = ["packetscope"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+packetscope = ["web/*", "sample_data/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82"]
